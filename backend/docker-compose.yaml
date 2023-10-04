@@ -1,0 +1,9 @@
+services:
+  web:
+    image: niksingla/react-project:1.0
+    container_name: react-project
+    build: .
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 3010:3000
