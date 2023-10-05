@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import UserData from "../blocks/userlist";
+//import React, { useEffect, useState } from "react";
+
 
 const About = () => {
     return (
         <div className="about-wrapper">
-            <UserData />
             <h1>About Component</h1>
         </div>
     )

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 let show_users = false  
 const UserData = () => {
     const [users, setSidebar] = useState([]) 
     const [admins, setAdmins] = useState([]) 
+    const navigate = useNavigate()
     useEffect(()=>{
         getUsers()
     },[])
@@ -23,8 +24,15 @@ const UserData = () => {
                 'authorization':"bearer: "+localStorage.getItem('token')
             }
         }).catch(err =>{})
+        
         if(users){
             users = await users.json()
+            console.log(users)
+            if(users.error){
+                localStorage.clear()
+                navigate('/signin')
+                return;
+            }
             const admins = users.admin
             const uniqueadmins = Array.from(new Set(admins.map(obj => obj._id)))
             .map(id => {
