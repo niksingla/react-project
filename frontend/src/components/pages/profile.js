@@ -6,13 +6,16 @@ import UserData from "../blocks/userlist";
 const Profile  = () =>{
     const params = useParams()
     const navigate = useNavigate()
+    
     useEffect(()=>{
         const auth = localStorage.getItem("user")
         if(!auth) navigate('/signin')
         getUserDetails()
     },[])
     const getUserDetails = async () =>{
-        let id = params.id ? params.id:localStorage.getItem('user')._id
+        const localuser = JSON.parse(localStorage.getItem('user'))
+        let id = params.id ? params.id:localuser._id
+        console.log(localuser._id)
         const user = await fetch(`http://localhost:5000/users/${id}`,{
             headers:{
                 authorization:`bearer: ${localStorage.getItem("token")}`
